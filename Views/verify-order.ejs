@@ -1,0 +1,30 @@
+
+<%-include('partial/header')%>
+<%-include('partial/navbar')%>
+
+      <div class="container text-center"> 
+            <h3>Verify Order</h3>
+            <% if(validationsError){%>
+                  <p class="alert alert-danger" > 
+                        <%=validationsError.msg%>
+                  </p>
+            <%}else{%>      
+            <form action="/orders" method="post">
+                  <input type="hidden" name="cartId" value="<%=cartItem._id%>">
+                  <input type="hidden" name="name" value="<%=cartItem.name%>">
+                  <input type="hidden" name="price" value="<%=cartItem.price%>">
+                  <input type="hidden" name="amount" value="<%=cartItem.amount%>">
+                  <input type="hidden" name="productId" value="<%=cartItem.productId%>">
+                  <input type="hidden" name="userId" value="<%=cartItem.userId%>">
+                  <input type="hidden" name="email" value="<%=cartItem.email%>">
+                  <input type="text"  name="address" placeholder="please Enter Your Address"  class="form-control">
+                  <input type="submit"  name="verify" value="Order Now"  class=" btn btn-primary" >
+            </form>
+      <%}%>      
+      </div>
+
+
+
+
+
+<%-include('partial/footer')%>

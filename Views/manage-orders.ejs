@@ -1,0 +1,98 @@
+<%-include('partial/header')%>
+<%-include('partial/navbar')%>
+
+<div class="container text-center">
+
+            <!-- put == get method we used get Method to handel it -->
+            <form class="filter" action="/admin/filter/orders" method="GET">
+                <div class="row">
+                <div class="col col-md-10">
+                    <select name="status" class="form-control">
+                        <option value="all">All Orders</option>
+                        <option value="pending">Pending</option>
+                        <option value="sent">Sent</option>
+                        <option value="complete">Complete</option>
+                    </select>
+                </div>
+                <div class="col col-md-1">
+                    <input type="submit" class="btn btn-primary" value="Filter">
+                </div>
+                </div>
+            </form>
+            
+            <form class="filter"  method="GET"  action="/admin/filter/email" >
+                <div class="row">
+                    <div class="col col-md-10">
+                        <input type="email"  class="form-control" name="email" placeholder="User Email" >
+                        </div>
+                        <div class="col-md-1 ">
+                        <input type="submit" class='btn btn-primary'  value="search">
+                    </div>
+                </div>    
+            </form>
+    
+        <table class="table table-hover table-dark">
+            <thead>
+                <td>no</td>
+                <td>Email</td>
+                <td>Product name</td>
+                <td>Price</td>
+                <td>Amount</td>
+                <td>Total</td>
+                <td>Address</td>
+                <td>Status</td>
+                <td></td>
+                <td>Time</td>
+            </thead>
+            <tbody>
+                <% for(let i=0 ; i<items.length ; i++ ) {%>
+                    <tr>
+                        <td> <%=i+1 %> </td>
+                        <td> <%=items[i].email %> </td>
+                        <td>  <%=items[i].name%>  </td>
+                        <td>  <%=items[i].price%> </td>
+                        <td>  <%=items[i].amount%> </td>
+                        <td>  <%=items[i].price * items[i].amount %> </td>
+                        <td>  <%=items[i].address %> </td>
+                        <td> 
+                            <% if (items[i].status === 'pending') { %>
+                                <form  method="POST" action="/admin/orders/update">
+                                    <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                    <input type="hidden" name="productId" value="<%= items[i].productId %>">
+                                    <select name="status" class="form-control">
+                                        <option ><%=items[i].status%></option>
+                                        <option value="sent">sent</option>
+                                        <option value="complete">Complete</option>
+                                        <option value="pending">Pending</option>
+                                    </select>    
+                                    <td>
+                                        <input type="submit"class="btn btn-success" value="Save"> 
+                                    </td>
+                            
+                                </form>
+                                <% } %>
+                                <% if (items[i].status === 'sent' || items[i].status === 'complete') { %>
+                                <form style="display: inline-block" method="POST" action="/admin/orders/update">
+                                    <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                    <input type="hidden" name="productId" value="<%= items[i].productId %>">
+                                    <select name="status" class="form-control">
+                                        <option> <%=items[i].status%> </option>
+                                        <option value="complete">Complete</option>
+                                        <option value="pending">Pending</option>
+                                     </select>
+                                        <td>
+                                        <input type="submit"class="btn btn-success" value="Save"> 
+                                       </td>
+                                    </form>
+                                <% } %>
+                        </td>
+                        <td><%=  new Date(items[i].timestamp).toLocaleString()%></td>
+                    </tr>
+                    <%}%>
+            </tbody>
+        </table>
+
+
+</div>
+
+<%-include('partial/footer')%>

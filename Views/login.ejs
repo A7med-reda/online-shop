@@ -1,0 +1,41 @@
+<%-include('partial/header')%>
+<%-include('partial/navbar')%>
+
+<div class="container text-center"> 
+      <h3>Create Account</h3>
+      <form action="/login" method="post">
+            <input type="email" class="form-control" name="email" placeholder="E-mail">
+            <%let emailError =validationsError.find(err=> err.param === 'email')   %>
+            <%if(emailError){%>
+                  <p class="alert alert-danger">
+                        <%=emailError.msg%>
+                  </p>
+            <%}%>      
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <%let passwordError =validationsError.find(err=> err.param === 'password')   %>
+            <%if(passwordError){%>
+                  <p class="alert alert-danger">
+                        <%=passwordError.msg%>
+                  </p>
+            <%}%>     
+            <br> 
+            <input type="submit" value="Login" class="btn btn-primary">
+      </form>
+      <br>
+      <%if(authError){%>
+          <p class="alert alert-danger">
+            <%=authError%>
+          </p>
+      <%}%>
+      <br>
+      <div>
+            Don't have account ? <a href="/signup">Create Account</a>
+      </div>
+
+</div>
+
+
+
+
+
+<%-include('partial/footer')%>

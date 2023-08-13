@@ -1,0 +1,43 @@
+      <%-include('partial/header')%>
+
+      <%-include("partial/navbar.ejs")%>
+      <!-- Display product info -->
+      <div class="continer">
+           
+      <%if(!product){%>
+            <div class="alert alert-danger">
+                  There is No Match Product Match This Id
+            </div>
+      <%}else{%>
+            <div class="row">                  
+                  <div class="col col-12 col-md-6">   
+                        <div class="card" style="width: 50%;">
+                        <img src="/<%=product.image%>" class="card-img-top" style="max-height: 400px">
+                              <div class="card-body">
+                                    <form action="/cart" method="post" class="add-to-cart-form">
+                                          <input type="number" name="amount" class="form-control">
+                                          <input type="hidden" name="name" value="<%=product.name%>">
+                                          <input type="hidden" name="price" value="<%=product.price%>">
+                                          <input type="hidden" name="productId" value="<%=product._id%>">
+                                          <input type="hidden" name="redirectTo" value="/product/<%=product._id%>">
+                                          <input type="submit" value="Add To cart" class="btn btn-primary">
+                                    </form>
+                                    <%if(validationsError){%>
+                                          <p class="alert alert-danger"  style="margin-top: 15px"> 
+                                             <%=validationsError.msg%>
+                                          </p>
+                                       <%}%>
+                              </div>
+                        </div>
+                  </div> 
+                  <div  class="col col-12 col-md-6 product-detail">
+                        <h3><%=product.name%></h3>
+                        <h5>Price: <%=product.price%>$</h5>
+                        <p><%=product.description%></p> 
+                  </div>
+            </div>
+      <%}%>      
+      </div>
+
+
+<%-include('partial/footer')%>

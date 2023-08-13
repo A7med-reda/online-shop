@@ -1,0 +1,78 @@
+   <%-include('./partial/header.ejs')%>
+ 
+   <%-include('./partial/navbar.ejs')%>             
+<body>
+<div class="container">  
+      <!-- put == get method we used get Method to handel it -->
+      <form class="filter" action="/" method="GET">
+         <div class="row">
+            <div class="col col-md-10">
+               <select name="category" class="form-control">
+                  <option value="all">All</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="cloths">Cloths</option>
+                  <option value="phones">Phones</option>
+                  <option value="kitchens">Kitchens</option>
+               </select>
+            </div>
+            <div class="col col-md-2">
+               <input type="submit" class="btn btn-primary" value="Filter">
+            </div>
+         </div>
+      </form>
+            
+         <%if(validationsError){%>
+            <p class="alert alert-danger"  style="margin-top: 15px"> 
+               <%=validationsError.msg%>
+            </p>
+         <%}%>
+         
+         <%if(products.length === 0 ) {%>
+         <div class="alert alert-danger">
+            There is no Products 
+         </div>
+         <%}else{%>   
+         <div class="row">
+               <% for(let product of products ) {%>
+                     <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
+                        <div class="card" style="width: 17rem">
+                              <img  class="img-to" style="height: 300px" src=<%=product.image%>>
+                                 <div class="card-body">
+                                    <h5 class="card-title">
+                                       <a href="/product/<%=product._id%>"><%=product.name%></a>
+                                       <p>Price: <%=product.price%>$</p>
+                                    </h5>
+                                    <form action="/cart" method="post" class="add-to-cart-form">
+                                       <input type="number" name="amount" class="form-control">
+                                       <input type="hidden" name="name" value="<%=product.name%>">
+                                       <input type="hidden" name="price" value="<%=product.price%>">
+                                       <input type="hidden" name="productId" value="<%=product._id%>">
+                                       <input type="hidden" name="redirectTo" value="/">
+
+                                       <input type="submit" value="Add To cart" class="btn btn-primary">
+                                    </form>
+                                 </div>
+                        </div>
+                     </div>
+               <%}%>
+         </div>
+         <%}%>
+      </div>   
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <script src="/js/bootstrap.min.js"></script>
+         <script src="/js/popper.min.js"></script>
+   </body>
+   <%-include('./partial/footer.ejs')%>
+
+

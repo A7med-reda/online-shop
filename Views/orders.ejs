@@ -1,0 +1,49 @@
+
+
+      <%-include('partial/header')%>
+      <%-include('partial/navbar')%>
+
+      <div class="container text-center"> 
+      <% if(items.length === 0) { %>
+            <p class="alert alert-danger">There is no orders found</p>
+      <% } else { %>
+            <table class="table table-hover table-dark">
+                  <thead>
+                  <td>no</td>
+                  <td>Product name</td>
+                  <td>Price</td>
+                  <td>Amount</td>
+                  <td>Total</td>
+                  <td>Address</td>
+                  <td>time</td>
+                  <td>Status</td>
+                  <td></td>
+                  </thead>
+                  <tbody>
+                        <% for (let i = 0; i < items.length; i++) { %>
+                              <tr>
+                                    <td> <%= i+1 %> </td>
+                                    <td><a href="/product/<%= items[i].productId %>"><%= items[i].name %></a> </td>   
+                                    <td> <%= items[i].price %> $ </td>
+                                    <form method="POST">
+                                    <td> <%= items[i].amount %> </td>
+                                    <td> <%= items[i].price * items[i].amount %> $ </td>
+                                    <td> <%= items[i].address %> </td>
+                                    <td> <%=  new Date(items[i].timestamp).toLocaleString()%> </td>
+                                    <td> <%= items[i].status %> </td>
+                                    <td>
+                                          <input type="hidden" name="orderId" value="<%= items[i]._id %>">
+                                          <input type="submit" class="btn btn-danger" value="Cancel" formaction="/orders/cancel">
+                                    </td>
+                                    </form>
+                              </tr>
+                        <% } %>
+                  </tbody>
+            </table>
+      <%}%>
+      <form action="/orders/deleteAll" method="post">
+            <input type="submit" value="Cancel All" style="margin: 20px" class="btn btn-danger">
+      </form>
+      </div>
+
+      <%-include('partial/footer')%>

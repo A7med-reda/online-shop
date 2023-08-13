@@ -1,0 +1,59 @@
+
+<%-include('./partial/header.ejs')%>
+ 
+      <body>
+            <%-include('./partial/navbar.ejs')%>       
+
+            <div class="container text-center">
+                  <%if(validationsError){%>
+                        <p class="alert alert-danger"  style="margin-top: 15px"> 
+                           <%=validationsError.msg%>
+                        </p>
+                     <%}%>
+                     
+                  <% if(items.length === 0) { %>
+                  <p class="alert alert-danger">There is no items</p>
+                  <% } else { %>
+                  
+                  <table class="table table-hover table-dark">
+                        <thead>
+                              <td>no</td>
+                              <td>Product Name</td>
+                              <td>Price</td>
+                              <td>Amount</td>
+                              <td>Total</td>
+                              <td></td>
+                        </thead>
+                        <tbody>
+                              <% for (let i = 0; i < items.length; i++) { %>
+                              <tr>
+                                    <td> <%= i+1 %> </td>
+                                    <td> <a href="/product/<%= items[i].productId %>"><%= items[i].name %></a> </td>
+                                    <td> <%= items[i].price %> $ </td>
+                                    <form method="POST">
+                                          <td> <input type="text" name="amount" class="form-control" value="<%= items[i].amount %>"> </td>
+                                          <td> <%= items[i].price * items[i].amount %> $ </td>
+                                          <td>
+                                          <input type="hidden" name="cartId" value="<%= items[i]._id %>">
+                                          <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
+                                          <a href="/orders/verify-order?order=<%= items[i]._id %>" class="btn btn-primary">Order</a>
+                                          <input type="submit" class="btn btn-danger" value="Delete" formaction="/cart/delete">
+                                    </td>
+                              </form>
+                        </tr>
+                        <% } %>
+                  </tbody>
+            </table>
+            <% } %>
+            <form  method="post">
+                  <input type="submit" value="Delete All" formaction="/cart/deleteAll" style="margin: 20px" class="btn btn-danger">
+                  <!-- <input type="submit" value="Order All" formaction="/orders/verify-order" "style="margin: 20px" class="btn btn-primary""> -->
+                  <!-- <a href="/orders/verify-order" class="btn btn-primary">Order All</a> -->
+
+            </form>
+      </div>
+      
+</body>
+
+<%-include('./partial/footer.ejs')%>
+

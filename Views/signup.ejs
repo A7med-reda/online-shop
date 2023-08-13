@@ -1,0 +1,53 @@
+<%-include('partial/header')%>
+<%-include('partial/navbar')%>
+
+<div class="container text-center"> 
+      <h3>Create Account</h3>
+      <form action="/signup" method="post">
+            <input type="text" class="form-control" name="username" placeholder="UserName">
+            <%let usernameError = validationErrors.find(err=>err.param === "username")%>
+            <%if(usernameError){%>
+                  <p class="alert alert-danger">
+                  <%=usernameError.msg%>
+                  </p>
+               <%}%>
+            <input type="email" class="form-control" name="email" placeholder="E-mail">
+            <%let emailError = validationErrors.find(err=>err.param === "email")%>
+            <%if(emailError){%>
+                  <p class="alert alert-danger">
+                  <%=emailError.msg%>
+                  </p>
+               <%}%>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <%let passwordError = validationErrors.find(err=>err.param === "password")%>
+            <%if(passwordError){%>
+                  <p class="alert alert-danger">
+                  <%=passwordError.msg%>
+                  </p>
+               <%}%>
+            <input type="password" class="form-control" name="confirmPassword" placeholder="confirm Password">
+            <%let passwordConfirmError = validationErrors.find(err=>err.param === "confirmPassword")%>
+            <%if(passwordConfirmError ){%>
+                  <p class="alert alert-danger">
+                  <%=passwordConfirmError.msg%>
+                  </p>
+               <%}%>
+            <br>
+            <input type="submit" value="Create Account" class="btn btn-primary">
+      </form>
+      <br>
+       <%if(authError){%>
+            <p class="alert alert-danger"> 
+                  <%=authError%> 
+            </p>
+      <%}%>
+      <br>
+
+      <div>
+            Already have account ? <a href="/login">Login</a>
+      </div>
+
+</div>
+
+
+<%-include('partial/footer')%>
