@@ -12,7 +12,7 @@ npm install
 
 ## Usage
 
-just use node server.js to run the application using the url http://localhost:8080
+just use node server.js to run the application using the url http://localhost:3000
 
 ## Contributing
 
