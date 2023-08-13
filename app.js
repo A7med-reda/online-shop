@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const session = require("express-session");
-const { error } = require("console");
 const { nextTick } = require("process");
 // to save session on mongodb
 const SessionStore = require("connect-mongodb-session")(session);
