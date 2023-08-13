@@ -12,8 +12,7 @@ const authRouter = require("./routes/authRoute");
 const cartRouter = require("./routes/cartRoute");
 const orderRouter = require("./routes/orderRoute");
 const adminRouter = require("./routes/adminRoute");
-const { error } = require("console");
-const { nextTick } = require("process");
+
 // serve static Files
 app.use(express.static(path.join(__dirname, "/Assets")));
 app.use(express.static(path.join(__dirname, "/image")));
@@ -48,7 +47,7 @@ app.use(flash());
 
 // set template engine
 app.set("view engine", "ejs");
-// app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "Views"));
 
 app.use(express.urlencoded({ extended: true }));
 
