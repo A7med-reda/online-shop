@@ -14,8 +14,8 @@ const orderRouter = require("./routes/orderRoute");
 const adminRouter = require("./routes/adminRoute");
 
 // serve static Files
-app.use(express.static(path.join(__dirname, "/Assets")));
-app.use(express.static(path.join(__dirname, "/image")));
+app.use(express.static(path.join( __dirname, "/Assets")));
+app.use(express.static(path.join( __dirname, "/image")));
 
 // set in mongodb to  store sessionS
 const STORE = new SessionStore({
