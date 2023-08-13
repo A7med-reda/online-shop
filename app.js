@@ -58,14 +58,14 @@ app.use("/cart", cartRouter);
 app.use("/orders", orderRouter);
 app.use("/admin", adminRouter);
 
-app.get("/error", (req, res, next) => {
-  res.status(500);
-  res.render("error", {
-    isUser: req.session.isUser,
-    isAdmin: req.session.isAdmin,
-    title: "Error",
-  });
-});
+// app.get("/error", (req, res, next) => {
+//   res.status(500);
+//   res.render("error", {
+//     isUser: req.session.isUser,
+//     isAdmin: req.session.isAdmin,
+//     title: "Error",
+//   });
+// });
 
 app.get("/not-admin", (req, res, next) => {
   res.status(403);
@@ -75,10 +75,10 @@ app.get("/not-admin", (req, res, next) => {
     title: "NoT Admin",
   });
 });
-//  default error handling
-app.use((error, req, res, next) => {
-  res.redirect("/error");
-});
+// //  default error handling
+// app.use((error, req, res, next) => {
+//   res.redirect("/error");
+// });
 
 app.use((req, res, next) => {
   res.status(404);
