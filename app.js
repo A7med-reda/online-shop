@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const session = require("express-session");
-const { nextTick } = require("process");
 // to save session on mongodb
 const SessionStore = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
@@ -90,7 +89,8 @@ app.use((req, res, next) => {
     pageTitle: "page not Found",
   });
 });
+const port = process.env.PORT || 3000;
 
-app.listen(process.env.PORT  || 8080, () => {
-  console.log("Express is On");
+app.listen( port , () => {
+  console.log("Express is On Port " + port);
 });
