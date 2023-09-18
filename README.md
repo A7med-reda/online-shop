@@ -1,7 +1,10 @@
 # Node-online-shop
 ## Technology 
-Node.js , Express 
+
+Node.js , Express
+
 Features :
+
 User Registration: Users can create an account to access the shopping platform.
 Product Catalog: Browse and search through a wide range of products.
 Product Details: View detailed information about each product, including price, description.
